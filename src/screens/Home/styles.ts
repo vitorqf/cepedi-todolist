@@ -1,5 +1,6 @@
 import { Platform } from "react-native";
 import styled from "styled-components/native";
+import { Task } from "../../components/Task";
 
 export const Container = styled.SafeAreaView`
   flex: 1;
@@ -10,7 +11,21 @@ export const Container = styled.SafeAreaView`
   align-items: center;
 `;
 
-export const Scroll = styled.ScrollView`
+export const List = styled.FlatList`
   flex: 1;
   width: 100%;
+`;
+
+export const Input = styled.TextInput`
+  background-color: #222;
+  width: 100%;
+  height: 56px;
+  border-radius: 8px;
+  margin-bottom: 8px;
+  padding: 0 16px;
+  color: #ffffff;
+`;
+
+export const StyledTask = styled(Task)`
+  background-color: #fff;
 `;

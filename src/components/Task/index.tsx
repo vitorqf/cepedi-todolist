@@ -1,14 +1,16 @@
 import { Text } from "react-native";
+import { TaskProps } from "../../screens/Home";
 import { Container, TaskDelete, TaskDone, TaskText } from "./styles";
 
-export function Task() {
+// O {...others} é utilizado caso queiramos re-estilizar o componente através do Styled, veja um exemplo no arquivo de estilos da Home, onde existe o StyledTask
+export function Task({ id, title, done, ...others }: TaskProps) {
   return (
-    <Container>
+    <Container {...others}>
       <TaskDone>
         <Text>V</Text>
       </TaskDone>
 
-      <TaskText>Hello World</TaskText>
+      <TaskText>{title}</TaskText>
 
       <TaskDelete>
         <Text>X</Text>
