@@ -19,6 +19,8 @@ import { useNavigation } from '@react-navigation/native';
 import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 
 import { TaskProps } from "../../screens/Home";
+import { useContext } from "react";
+import { TaskContext } from "../../context/TaskContext";
 
 type RootStackParamList = {
     Home: undefined;
@@ -27,18 +29,17 @@ type RootStackParamList = {
   
 type Props = NativeStackScreenProps<RootStackParamList>;
 
-export function Detail( {route}: any) {
+export function Detail() {
 
     const navigation = useNavigation<Props['navigation']>();
-    const { id, title, done } = route.params;
+
+    const {task} = useContext(TaskContext);
 
     return (
         <Container>
             <TopContainer>
                 <BackButton onPress={() => navigation.popToTop()}>
-                    <BackButtonText>
-                        {"<"}
-                    </BackButtonText>
+                    <Feather name="chevron-left" size={24} color="white" />
                     <BackButtonText>
                         Voltar
                     </BackButtonText>
@@ -47,7 +48,7 @@ export function Detail( {route}: any) {
 
             <TaskTitleContainer>
                 <TaskTitle>
-                    {title}
+                    {task.title}
                 </TaskTitle>
             </TaskTitleContainer>
 
@@ -59,7 +60,7 @@ export function Detail( {route}: any) {
                         <Feather name="check-square" size={24} color="white" />
                     </StatusIcon>
                     <StatusTextContainer>
-                        <StatusText>{done ? 'Realizada' : 'Em aberto'}</StatusText>
+                        <StatusText>{task.done ? 'Realizada' : 'Em aberto'}</StatusText>
                     </StatusTextContainer>
                 </StatusCard>
 

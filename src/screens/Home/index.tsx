@@ -3,7 +3,8 @@ import { useState } from "react";
 import { FlatList, Text, TouchableOpacity } from "react-native";
 import { Task } from "../../components/Task";
 import { Title } from "../../components/Title";
-import { Container, Input } from "./styles";
+import { Container, Input, InputContainer, ButtonAdd } from "./styles";
+import { Feather } from '@expo/vector-icons';
 
 export interface TaskProps {
   id: number;
@@ -52,15 +53,17 @@ export function Home() {
   return (
     <Container>
       <StatusBar style="light" />
-      <Input
-        placeholder="Pesquisar tarefa"
-        placeholderTextColor="#ffffff"
-        value={taskName}
-        onChangeText={setTaskName}
-      />
-      <TouchableOpacity onPress={() => handleAddNewTask(taskName)}>
-        <Text>Adicionar tarefa</Text>
-      </TouchableOpacity>
+      <InputContainer>
+        <Input
+          placeholder="Pesquisar tarefa"
+          placeholderTextColor="#ffffff"
+          value={taskName}
+          onChangeText={setTaskName}
+        />
+        <ButtonAdd onPress={() => handleAddNewTask(taskName)}>
+          <Feather name="plus" size={24} color="white" />
+        </ButtonAdd>
+      </InputContainer>
       <Title />
       {/* <Scroll
         showsVerticalScrollIndicator={false}
