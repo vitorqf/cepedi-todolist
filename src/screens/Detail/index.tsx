@@ -18,16 +18,19 @@ import { Feather } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 
+import { TaskProps } from "../../screens/Home";
+
 type RootStackParamList = {
     Home: undefined;
-    Detail: undefined;
+    Detail: TaskProps;
   };
   
 type Props = NativeStackScreenProps<RootStackParamList>;
 
-export function Detail() {
+export function Detail( {route}: any) {
 
     const navigation = useNavigation<Props['navigation']>();
+    const { id, title, done } = route.params;
 
     return (
         <Container>
@@ -43,7 +46,9 @@ export function Detail() {
             </TopContainer>
 
             <TaskTitleContainer>
-                <TaskTitle>Título da tarefa</TaskTitle>
+                <TaskTitle>
+                    {title}
+                </TaskTitle>
             </TaskTitleContainer>
 
             <TextStatus>Status da tarefa</TextStatus>
@@ -54,7 +59,7 @@ export function Detail() {
                         <Feather name="check-square" size={24} color="white" />
                     </StatusIcon>
                     <StatusTextContainer>
-                        <StatusText>Realizada</StatusText>
+                        <StatusText>{done ? 'Realizada' : 'Em aberto'}</StatusText>
                     </StatusTextContainer>
                 </StatusCard>
 
