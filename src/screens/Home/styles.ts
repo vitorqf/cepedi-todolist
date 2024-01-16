@@ -7,7 +7,7 @@ export const Container = styled(SafeAreaView)`
   flex: 1;
   background-color: #28385e;
   padding: 0 16px;
-  padding-top: ${Platform.OS === "android" ? 56 : 64}px;
+  padding-top: ${Platform.OS === "android" ? 56 : 16}px;
   justify-content: center;
   align-items: center;
 `;

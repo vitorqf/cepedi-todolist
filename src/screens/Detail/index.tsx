@@ -15,12 +15,24 @@ import {
 } from "./styles";
 import { Feather } from '@expo/vector-icons';
 
+import { useNavigation } from '@react-navigation/native';
+import type { NativeStackScreenProps } from '@react-navigation/native-stack';
+
+type RootStackParamList = {
+    Home: undefined;
+    Detail: undefined;
+  };
+  
+type Props = NativeStackScreenProps<RootStackParamList>;
 
 export function Detail() {
+
+    const navigation = useNavigation<Props['navigation']>();
+
     return (
         <Container>
             <TopContainer>
-                <BackButton>
+                <BackButton onPress={() => navigation.popToTop()}>
                     <BackButtonText>
                         {"<"}
                     </BackButtonText>
