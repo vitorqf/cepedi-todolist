@@ -1,10 +1,10 @@
-import { Feather } from "@expo/vector-icons";
 import { StatusBar } from "expo-status-bar";
-import { useContext, useState } from "react";
-import { FlatList, Text } from "react-native";
+import { useState } from "react";
+import { FlatList, Text, TouchableOpacity } from "react-native";
 import { Task } from "../../components/Task";
-import { TaskContext } from "../../context/TaskContext";
-import { ButtonAdd, Container, Input, InputContainer } from "./styles";
+import { Title } from "../../components/Title";
+import { Container, Input, InputContainer, ButtonAdd } from "./styles";
+import { Feather } from '@expo/vector-icons';
 
 export interface TaskProps {
   id: number;
@@ -12,26 +12,79 @@ export interface TaskProps {
   done: boolean;
 }
 
+const TASKS = [
+  {
+    id: 1,
+    title: "Desenvolver o APP",
+    done: false,
+  },
+  {
+    id: 2,
+    title: "Lavar a louça",
+    done: false,
+  },
+  {
+    id: 3,
+    title: "Formatar o computador",
+    done: false,
+  },
+  {
+    id: 4,
+    title: "Estudar Styled Components",
+    done: true,
+  },
+];
+
 export function Home() {
+  const [tasks, setTasks] = useState(TASKS);
   const [taskName, setTaskName] = useState("");
-  const { tasks, createTask } = useContext(TaskContext);
+  const [count, setCount] = useState(4);
+
+  function handleAddNewTask(title: string) {
+    const newTask = {
+      id: count,
+      title,
+      done: false,
+    };
+    setCount(count + 1);
+    setTasks([...tasks, newTask]);
+  }
 
   return (
     <Container>
       <StatusBar style="light" />
-
       <InputContainer>
         <Input
-          placeholder="Adicionar tarefa"
+          placeholder="Pesquisar tarefa"
           placeholderTextColor="#ffffff"
           value={taskName}
           onChangeText={setTaskName}
         />
-        <ButtonAdd onPress={() => createTask(taskName)}>
+        <ButtonAdd onPress={() => handleAddNewTask(taskName)}>
           <Feather name="plus" size={24} color="white" />
         </ButtonAdd>
       </InputContainer>
-
+      <Title />
+      {/* <Scroll
+        showsVerticalScrollIndicator={false}
+        contentContainerStyle={{
+          gap: 16,
+          paddingBottom: 32,
+        }}
+      >
+        {tasks.map((task) => {
+          if (!task.done) {
+            return (
+              <Task
+                id={task.id}
+                title={task.title}
+                done={task.done}
+                key={task.id}
+              />
+            );
+          }
+        })}
+      </Scroll> */}
       <FlatList
         style={{
           flex: 1,
